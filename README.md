@@ -9,3 +9,6 @@ Patrascu Robert Vladut  342C1   rvlad.patrascu@gmail.com
 Spataru Eleonora        343C2   eleonora.spataru@gmail.com
 Tudureanu Romeo         342C5   romeo.tudureanu@gmail.com
 </pre>
+
+# TODO
+Complete README
