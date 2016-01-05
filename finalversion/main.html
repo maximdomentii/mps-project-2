@@ -39,7 +39,7 @@ function init()
 	canvas.width = W;
 	canvas.height = H;
 	
-	var length, angle, decreaseFactor, line_width, start_points = [];
+	var length, angle, angleInitial, decreaseFactor, line_width, start_points = [];
 	
 	draw();
 	
@@ -55,7 +55,8 @@ function init()
 		length = 150;
 		
 		decreaseFactor = randomFloatBetween(0.65,0.75,2);
-		angle = getRandomInt(10,60);
+		angle = getRandomInt(20,60);
+		angleInitial = angle;
 		tilt = getRandomInt(-15,15);
 		
 		
@@ -91,7 +92,8 @@ function init()
 		ctx.beginPath();
 		
 		for(var i = 0; i < start_points.length; i++)
-		{			
+		{	
+			angle = getRandomInt(angleInitial - 10, angleInitial + 10);
 			var sp = start_points[i];
 			var ep1 = get_endpoint(sp.x, sp.y, sp.angle+angle, length);
 			var ep2 = get_endpoint(sp.x, sp.y, sp.angle-angle, length);
@@ -111,7 +113,8 @@ function init()
 		g = getRandomInt(0,255);
 		b = getRandomInt(0,255);
 		
-		ctx.strokeStyle = 'rgb(' + r + ', ' + g + ', ' + b + ')';			
+		ctx.strokeStyle = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+		angle = getRandomInt(angle - 10, angle + 10);
 		if(length > 1.5) { setTimeout(function(){branches()},300); }
 	}
 	
