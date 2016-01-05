@@ -93,8 +93,20 @@ function init()
 		var new_start_points = [];
 		ctx.beginPath();
 		
-		for(var i = 0; i < start_points.length; i++)
-		{	
+		var angleTrunk = getRandomInt(20,40);
+		var sp = start_points[0];
+		var ep1 = get_endpoint(sp.x, sp.y, sp.angle+angleTrunk, length);
+		var ep2 = get_endpoint(sp.x, sp.y, sp.angle-angleTrunk, length);
+		ctx.moveTo(sp.x, H-sp.y);
+		ctx.lineTo(ep1.x, H-ep1.y);
+		ctx.moveTo(sp.x, H-sp.y);
+		ctx.lineTo(ep2.x, H-ep2.y);
+		ep1.angle = sp.angle+angleTrunk - tilt;
+		ep2.angle = sp.angle-angleTrunk - tilt;			
+		new_start_points.push(ep1);
+		new_start_points.push(ep2);
+		for(var i = 1; i < start_points.length; i++)
+		{				
 			angle = getRandomInt(angleInitial - 10, angleInitial + 10);
 			var sp = start_points[i];
 			var ep1 = get_endpoint(sp.x, sp.y, sp.angle+angle, length);
