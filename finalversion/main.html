@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MPS Proiect 2</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	font-size: 110%;
+}
+#canvas {
+	display: block;
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+</style>
+<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+
+</head>
+
+<body>
+	
+<canvas id="canvas"></canvas>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	init();
+});
+
+
+function init() 
+{
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	var W = window.innerWidth;
+	var H = window.innerHeight;
+	canvas.width = W;
+	canvas.height = H;
+	
+	var length, angle, decreaseFactor, line_width, start_points = [];
+	
+	draw();
+	
+	function draw()
+	{
+		//putem folosi in cazul in care vrem background color random
+		var backgrounds = ["black", "#394209", "#56391a" , "#072f36" , "#360728"];
+		var randomBackground = backgrounds[Math.floor(Math.random()*backgrounds.length)];
+		
+		ctx.fillStyle = "black"
+		ctx.fillRect(0, 0, W, H);
+		
+		length = 230;
+		
+		decreaseFactor = randomFloatBetween(0.65,0.75,2);
+		angle = getRandomInt(10,60);
+		tilt = getRandomInt(-15,15);
+		
+		
+		line_width = getRandomInt(10,30);
+		
+		var trunk = {x: canvas.width/2, y: length+50, angle: 90};
+		
+		start_points = []; 
+		start_points.push(trunk);	
+		ctx.globalCompositeOperation = "darker";		
+		ctx.beginPath();
+		ctx.moveTo(trunk.x, H-50);
+		ctx.lineTo(trunk.x, H-trunk.y);
+		
+		r =  getRandomInt(0,255);
+		g =  getRandomInt(0,255);
+		b =  getRandomInt(0,255);
+		
+		ctx.strokeStyle = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+		ctx.lineWidth = line_width;
+		ctx.stroke();
+		
+		branches();
+	}
+	
+	function branches()
+	{
+		length = length * decreaseFactor;
+		line_width = line_width * decreaseFactor;
+		ctx.lineWidth = line_width;
+		
+		var new_start_points = [];
+		ctx.beginPath();
+		
+		for(var i = 0; i < start_points.length; i++)
+		{			
+			var sp = start_points[i];
+			var ep1 = get_endpoint(sp.x, sp.y, sp.angle+angle, length);
+			var ep2 = get_endpoint(sp.x, sp.y, sp.angle-angle, length);
+			ctx.moveTo(sp.x, H-sp.y);
+			ctx.lineTo(ep1.x, H-ep1.y);
+			ctx.moveTo(sp.x, H-sp.y);
+			ctx.lineTo(ep2.x, H-ep2.y);
+			ep1.angle = sp.angle+angle - tilt;
+			ep2.angle = sp.angle-angle - tilt;			
+			new_start_points.push(ep1);
+			new_start_points.push(ep2);
+		}
+		ctx.stroke();
+		start_points = new_start_points;
+		
+		r = getRandomInt(0,255);
+		g = getRandomInt(0,255);
+		b = getRandomInt(0,255);
+		
+		ctx.strokeStyle = 'rgb(' + r + ', ' + g + ', ' + b + ')';			
+		if(length > 1.5) { branches(); }
+	}
+	
+	function get_endpoint(x, y, a, length)
+	{
+		var epx = x + length * Math.cos(a*Math.PI/180);
+		var epy = y + length * Math.sin(a*Math.PI/180);
+		return {x: epx, y: epy};
+	}
+	
+}
+
+// Random int between min and max
+function getRandomInt(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Random float between min and max
+function randomFloatBetween(minValue,maxValue,precision){
+    if(typeof(precision) == 'undefined'){
+        precision = 2;
+    }
+    return parseFloat(Math.min(minValue + (Math.random() * (maxValue - minValue)),maxValue).toFixed(precision));
+}
+</script>
+</body>
+</html>
