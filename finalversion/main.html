@@ -54,13 +54,15 @@ function init()
 		
 		length = 150;
 		
-		decreaseFactor = randomFloatBetween(0.65,0.75,2);
+		decreaseFactor = randomFloatBetween(0.68,0.75,3);
 		angle = getRandomInt(20,60);
 		angleInitial = angle;
-		tilt = getRandomInt(-15,15);
+		var minTilt = getRandomInt(-15, -5), maxTilt = getRandomInt(5, 15);
+		tilt = [minTilt, maxTilt][getRandomInt(0, 1)];
+		// tilt = getRandomInt(-15,15);
 		
 		
-		line_width = getRandomInt(10,25);
+		line_width = getRandomInt(10,20);
 		
 		var trunk = {x: canvas.width/2, y: length+50, angle: 90};
 		
@@ -115,7 +117,7 @@ function init()
 		
 		ctx.strokeStyle = 'rgb(' + r + ', ' + g + ', ' + b + ')';
 		angle = getRandomInt(angle - 10, angle + 10);
-		if(length > 1.5) { setTimeout(function(){branches()},300); }
+		if(length > 0.5) { setTimeout(function(){branches()}, 300); }
 	}
 	
 	function get_endpoint(x, y, a, length)
