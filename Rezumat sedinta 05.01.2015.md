@@ -37,4 +37,4 @@ Student PUB, 09:00-11:00, 05.01.2016
 
 ##Concluzii
 
-Avem o idee finala a tehnologiei folosite. Am respectat milestone-urile stabilite inainte de vacanta (ficare dintre noi a s-a documentat in privinta tehnologiei folosite si a unui mod cat mai simplist prin care putem obtine o imagine decenta.
+Avem o idee finala a tehnologiei folosite. Am respectat milestone-urile stabilite inainte de vacanta (ficare dintre noi s-a documentat in privinta tehnologiei folosite si a unui mod cat mai simplist prin care putem obtine o imagine inteligibila.
