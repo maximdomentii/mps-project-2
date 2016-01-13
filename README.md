@@ -6,6 +6,7 @@ Cimpian Vlad - Andrei   342C5   vladcimpian@gmail.com
 Domentii Maxim          342C5   domentiimaxim@yahoo.com
 Nedeloiu Adrian George  342C5   nedeloiuadrian@gmail.com
 Tudureanu Romeo         342C5   romeo.tudureanu@gmail.com
+Patrascu Robert Vladut  342C1   rvlad.patrascu@gmail.com
 </pre>
 
 # Implementare
